@@ -1,3 +1,5 @@
+package src.main.java.com.projedata.app;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,8 +8,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import model.Funcionario;
-import service.FuncionarioService;
+import src.main.java.com.projedata.model.Funcionario;
+import src.main.java.com.projedata.service.FuncionarioService;
 
 public class Principal {
     static final double SALARIO_MINIMO = 1212.00;

@@ -1,11 +1,11 @@
-package repository;
+package src.main.java.com.projedata.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import model.Funcionario;
+import src.main.java.com.projedata.model.Funcionario;
 
 public class FuncionarioRepository {
     private List<Funcionario> funcionarios = new ArrayList<>();

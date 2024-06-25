@@ -1,4 +1,4 @@
-package model;
+package src.main.java.com.projedata.model;
 
 import java.time.LocalDate;
 
