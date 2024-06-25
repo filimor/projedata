@@ -127,15 +127,23 @@ public class Principal {
         System.out.println(
                 "\n🟦 3.9 - Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade.\n");
 
-        var maisVelho = funcionarioService.ObterTodos()
+        Funcionario maisVelho = funcionarioService.ObterTodos()
                 .stream()
-                .sorted(Comparator.comparing(Funcionario::getDataNascimento))
+                .sorted(Comparator.comparing(x -> x.DataNascimento))
                 .findFirst()
                 .orElse(null);
         var idade = Period.between(maisVelho.DataNascimento, LocalDate.now()).getYears();
 
         System.out.println(String.format("Nome: %s, Idade: %s anos", maisVelho.Nome, idade));
 
+        // 3.10 - Imprimir a lista de funcionários por ordem alfabética.
+
+        System.out.println("\n🟦 3.10 - Imprimir a lista de funcionários por ordem alfabética.\n");
+
+        funcionarioService.ObterTodos()
+                .stream()
+                .sorted()
+                .forEach(System.out::println);
     }
 
     private static void ImprimirTodos() {

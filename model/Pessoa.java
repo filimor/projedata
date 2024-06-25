@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Comparable<Pessoa> {
     public String Nome;
     public LocalDate DataNascimento;
 
@@ -25,5 +25,10 @@ public abstract class Pessoa {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         DataNascimento = dataNascimento;
+    }
+
+    @Override
+    public int compareTo(Pessoa pessoa) {
+        return this.Nome.compareTo(pessoa.Nome);
     }
 }
