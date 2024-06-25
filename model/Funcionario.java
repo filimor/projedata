@@ -6,9 +6,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public final class Funcionario extends Pessoa {
-    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0.00");
     private BigDecimal salario;
     private String funcao;
+
+    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0.00");
 
     public Funcionario(String nome, LocalDate dataNascimento, BigDecimal salario, String funcao) {
         super(nome, dataNascimento);

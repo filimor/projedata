@@ -8,10 +8,9 @@ import model.Funcionario;
 import repository.FuncionarioRepository;
 
 public class FuncionarioService {
-    private FuncionarioRepository funcionarioRepository;
+    private FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
 
     public FuncionarioService() {
-        funcionarioRepository = new FuncionarioRepository();
     }
 
     public List<Funcionario> obterTodos() {

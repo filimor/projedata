@@ -8,10 +8,9 @@ import java.util.stream.Collectors;
 import model.Funcionario;
 
 public class FuncionarioRepository {
-    private List<Funcionario> funcionarios;
+    private List<Funcionario> funcionarios = new ArrayList<>();
 
     public FuncionarioRepository() {
-        this.funcionarios = new ArrayList<Funcionario>();
     }
 
     public List<Funcionario> obterTodos() {
