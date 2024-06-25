@@ -1,7 +1,8 @@
 package service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import model.Funcionario;
 import repository.FuncionarioRepository;
@@ -13,32 +14,47 @@ public class FuncionarioService {
         funcionarioRepository = new FuncionarioRepository();
     }
 
-    public ArrayList<Funcionario> ObterTodos() {
-        return funcionarioRepository.ObterTodos();
+    public List<Funcionario> obterTodos() {
+        return funcionarioRepository.obterTodos();
     }
 
-    public void Inserir(Funcionario funcionario) {
-        this.funcionarioRepository.Inserir(funcionario);
+    public void inserir(Funcionario funcionario) {
+        this.funcionarioRepository.inserir(funcionario);
     }
 
-    public void Inserir(ArrayList<Funcionario> funcionarios) {
-        funcionarios.forEach(this.funcionarioRepository::Inserir);
+    public void inserir(List<Funcionario> funcionarios) {
+        funcionarios.forEach(this.funcionarioRepository::inserir);
     }
 
-    public void Remover(String nome) {
-        this.funcionarioRepository.Remover(nome);
+    public void remover(String nome) {
+        this.funcionarioRepository.remover(nome);
     }
 
-    public void DarAumento(double porcentagem) {
-        for (Funcionario funcionario : funcionarioRepository.ObterTodos()) {
-            var salarioNovo = funcionario.Salario.multiply(BigDecimal.valueOf(1 + porcentagem));
-            var funcionarioNovo = new Funcionario(funcionario.Nome, funcionario.DataNascimento, salarioNovo,
-                    funcionario.Funcao);
-            funcionarioRepository.Atualizar(funcionario.Nome, funcionarioNovo);
+    public void darAumento(double porcentagem) {
+        for (Funcionario funcionario : funcionarioRepository.obterTodos()) {
+            var salarioNovo = funcionario.getSalario().multiply(BigDecimal.valueOf(1 + porcentagem));
+            var funcionarioNovo = new Funcionario(funcionario.getNome(), funcionario.getDataNascimento(), salarioNovo,
+                    funcionario.getFuncao());
+            funcionarioRepository.atualizar(funcionario.getNome(), funcionarioNovo);
         }
     }
 
-    public ArrayList<Funcionario> PesquisarPorMesDeNascimento(ArrayList<Integer> meses) {
-        return funcionarioRepository.Pesquisar(x -> meses.contains(x.DataNascimento.getMonthValue()));
+    public BigDecimal obterSalarioTotal() {
+        return obterTodos()
+                .stream()
+                .map(x -> x.getSalario())
+                .reduce((x, y) -> x.add(y))
+                .orElse(null);
+    }
+
+    public List<Funcionario> obterPorOrdemAlfabetica() {
+        return obterTodos()
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public List<Funcionario> pesquisarPorMesDeNascimento(List<Integer> meses) {
+        return funcionarioRepository.pesquisar(x -> meses.contains(x.getDataNascimento().getMonthValue()));
     }
 }

@@ -1,49 +1,50 @@
 package repository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import model.Funcionario;
 
 public class FuncionarioRepository {
-    private ArrayList<Funcionario> funcionarios;
+    private List<Funcionario> funcionarios;
 
     public FuncionarioRepository() {
         this.funcionarios = new ArrayList<Funcionario>();
     }
 
-    public ArrayList<Funcionario> ObterTodos() {
+    public List<Funcionario> obterTodos() {
         return new ArrayList<>(this.funcionarios);
     }
 
-    public Funcionario ObterPorNome(String nome) {
+    public Funcionario obterPorNome(String nome) {
         return this.funcionarios.stream()
-                .filter(x -> x.Nome.equals(nome))
+                .filter(x -> x.getNome().equals(nome))
                 .findFirst()
                 .orElse(null);
     }
 
-    public void Inserir(Funcionario funcionario) {
+    public void inserir(Funcionario funcionario) {
         this.funcionarios.add(funcionario);
     }
 
-    public Funcionario Atualizar(String nome, Funcionario funcionarioNovo) {
-        var funcionario = this.ObterPorNome(nome);
+    public Funcionario atualizar(String nome, Funcionario funcionarioNovo) {
+        var funcionario = this.obterPorNome(nome);
 
-        funcionario.Nome = funcionarioNovo.Nome;
-        funcionario.DataNascimento = funcionarioNovo.DataNascimento;
-        funcionario.Salario = funcionarioNovo.Salario;
-        funcionario.Funcao = funcionarioNovo.Funcao;
+        funcionario.setNome(funcionarioNovo.getNome());
+        funcionario.setDataNascimento(funcionarioNovo.getDataNascimento());
+        funcionario.setSalario(funcionarioNovo.getSalario());
+        funcionario.setFuncao(funcionarioNovo.getFuncao());
 
         return funcionario;
     }
 
-    public void Remover(String nome) {
-        this.funcionarios.removeIf(x -> x.Nome.equals(nome));
+    public void remover(String nome) {
+        this.funcionarios.removeIf(x -> x.getNome().equals(nome));
     }
 
-    public ArrayList<Funcionario> Pesquisar(Predicate<Funcionario> condicao) {
+    public List<Funcionario> pesquisar(Predicate<Funcionario> condicao) {
         return new ArrayList<>(this.funcionarios.stream()
                 .filter(condicao)
                 .collect(Collectors.toList()));

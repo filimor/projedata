@@ -6,29 +6,30 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public final class Funcionario extends Pessoa {
-    public BigDecimal Salario;
-    public String Funcao;
+    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0.00");
+    private BigDecimal salario;
+    private String funcao;
 
     public Funcionario(String nome, LocalDate dataNascimento, BigDecimal salario, String funcao) {
         super(nome, dataNascimento);
-        this.Salario = salario;
-        this.Funcao = funcao;
+        this.salario = salario;
+        this.funcao = funcao;
     }
 
     public BigDecimal getSalario() {
-        return Salario;
+        return salario;
     }
 
     public void setSalario(BigDecimal salario) {
-        Salario = salario;
+        this.salario = salario;
     }
 
     public String getFuncao() {
-        return Funcao;
+        return funcao;
     }
 
     public void setFuncao(String funcao) {
-        Funcao = funcao;
+        this.funcao = funcao;
     }
 
     @Override
@@ -36,9 +37,9 @@ public final class Funcionario extends Pessoa {
         // • informação de data deve ser exibido no formato dd/mm/aaaa;
         // • informação de valor numérico deve ser exibida no formatado com separador de
         // milhar como ponto e decimal como vírgula.
-        var data = this.DataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        var salario = new DecimalFormat("#,##0.00").format(this.Salario);
+        var data = this.dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        var salario = DECIMAL_FORMAT.format(this.salario);
 
-        return String.format("%-15s\t%-10s\t%10s\t%s", this.Nome, data, salario, this.Funcao);
+        return String.format("%-15s\t%-10s\t%10s\t%s", this.nome, data, salario, this.funcao);
     }
 }

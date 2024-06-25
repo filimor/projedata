@@ -3,32 +3,32 @@ package model;
 import java.time.LocalDate;
 
 public abstract class Pessoa implements Comparable<Pessoa> {
-    public String Nome;
-    public LocalDate DataNascimento;
+    protected String nome;
+    protected LocalDate dataNascimento;
 
     public Pessoa(String nome, LocalDate dataNascimento) {
-        Nome = nome;
-        DataNascimento = dataNascimento;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public LocalDate getDataNascimento() {
-        return DataNascimento;
+        return dataNascimento;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
-        DataNascimento = dataNascimento;
+        this.dataNascimento = dataNascimento;
     }
 
     @Override
     public int compareTo(Pessoa pessoa) {
-        return this.Nome.compareTo(pessoa.Nome);
+        return this.nome.compareTo(pessoa.nome);
     }
 }
