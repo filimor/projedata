@@ -2,6 +2,8 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.Funcionario;
 import service.FuncionarioService;
@@ -76,7 +78,7 @@ public class Principal {
         // milhar como ponto e decimal como vírgula.
 
         System.out.println("\n🟦 3.2 - Remover o funcionário 'João' da lista.");
-        System.out.println("\n🟦 3.3 - Imprimir todos os funcionários com todas suas informações\n");
+        System.out.println("🟦 3.3 - Imprimir todos os funcionários com todas suas informações\n");
         funcionarioService.Remover("João");
         ImprimirTodos();
 
@@ -89,15 +91,31 @@ public class Principal {
         funcionarioService.DarAumento(0.1);
         ImprimirTodos();
 
+        // 3.5 - Agrupar os funcionários por função em um MAP, sendo a chave a 'função'
+        // e o valor a 'lista de funcionários'.
+        // 3.6 - Imprimir os funcionários, agrupados por função.
+
+        System.out.println(
+                "\n🟦 3.5 - Agrupar os funcionários por função em um MAP, sendo a chave a 'função' e o valor a 'lista de funcionários'.");
+        System.out.println(
+                "🟦 3.6 - Imprimir os funcionários, agrupados por função.\n");
+
+        var funcionariosMap = new HashMap<String, ArrayList<Funcionario>>();
+        for (var funcionario : funcionarioService.ObterTodos()) {
+            if (!funcionariosMap.containsKey(funcionario.Funcao)) {
+                funcionariosMap.put(funcionario.Funcao, new ArrayList<Funcionario>());
+            }
+            funcionariosMap.get(funcionario.Funcao).add(funcionario);
+        }
+
+        for (var entry : funcionariosMap.entrySet()) {
+            System.out.println("*" + entry.getKey().toUpperCase() + ":");
+            entry.getValue().forEach(System.out::println);
+        }
+
     }
 
     private static void ImprimirTodos() {
-        for (Funcionario funcionario : funcionarioService.ObterTodos()) {
-            var data = funcionario.DataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            var salario = new DecimalFormat("#,##0.00").format(funcionario.Salario);
-
-            System.out.println(String.format("%s\t%s\t%10s\t%s", funcionario.Nome, data,
-                    salario, funcionario.Funcao));
-        }
+        funcionarioService.ObterTodos().forEach(System.out::println);
     }
 }

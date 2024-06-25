@@ -1,7 +1,9 @@
 package model;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public final class Funcionario extends Pessoa {
     public BigDecimal Salario;
@@ -11,6 +13,14 @@ public final class Funcionario extends Pessoa {
         super(nome, dataNascimento);
         this.Salario = salario;
         this.Funcao = funcao;
+    }
+
+    @Override
+    public String toString() {
+        var data = this.DataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        var salario = new DecimalFormat("#,##0.00").format(this.Salario);
+
+        return String.format("%-15s\t%-10s\t%10s\t%s", this.Nome, data, salario, this.Funcao);
     }
 
     public BigDecimal getSalario() {
