@@ -1,7 +1,12 @@
 {
-    "cSpell.words": [
-        "funcao",
-        "Funcao",
-        "Funcionario"
-    ]
+  "files.exclude": {
+    "**/*.class": true
+  },
+  "cSpell.words": [
+    "funcao",
+    "Funcao",
+    "funcionario",
+    "Funcionario",
+    "funcionarios"
+  ]
 }
