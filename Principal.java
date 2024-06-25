@@ -1,6 +1,8 @@
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -118,6 +120,21 @@ public class Principal {
 
         var meses = new ArrayList<Integer>(List.of(10, 12));
         funcionarioService.PesquisarPorMesDeNascimento(meses).forEach(System.out::println);
+
+        // 3.9 - Imprimir o funcionário com a maior idade, exibir os atributos: nome e
+        // idade.
+
+        System.out.println(
+                "\n🟦 3.9 - Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade.\n");
+
+        var maisVelho = funcionarioService.ObterTodos()
+                .stream()
+                .sorted(Comparator.comparing(Funcionario::getDataNascimento))
+                .findFirst()
+                .orElse(null);
+        var idade = Period.between(maisVelho.DataNascimento, LocalDate.now()).getYears();
+
+        System.out.println(String.format("Nome: %s, Idade: %s anos", maisVelho.Nome, idade));
 
     }
 
