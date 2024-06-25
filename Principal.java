@@ -16,9 +16,18 @@ public class Principal {
     static FuncionarioService funcionarioService = new FuncionarioService();
 
     public static void main(String[] args) {
+        inserirTodosOsFuncionarios();
+        removerJoao();
+        darAumentoDeDezPorCento();
+        agruparFuncionariosEmUmMap();
+        imprimirAniversariantesOutubroDezembro();
+        imprimirMaisVelho();
+        imprimirEmOrdemAlfabetica();
+        imprimirTotalDosSalarios();
+        imprimirQuantidadeSalariosMinimos();
+    }
 
-        // 3.1 - Inserir todos os funcionários, na mesma ordem e informações da tabela.
-
+    private static void inserirTodosOsFuncionarios() {
         System.out.println("🟦 3.1 - Inserir todos os funcionários, na mesma ordem e informações da tabela.\n");
 
         funcionarioService.Inserir(new Funcionario(
@@ -72,11 +81,10 @@ public class Principal {
                 BigDecimal.valueOf(2799.93),
                 "Gerente"));
 
-        ImprimirTodos();
+        imprimirTodosOsFuncionarios();
+    }
 
-        // 3.2 - 3.2 - Remover o funcionário 'João' da lista.
-
-        // 3.3 - Imprimir todos os funcionários com todas suas informações, sendo que:
+    private static void removerJoao() {
         // • informação de data deve ser exibido no formato dd/mm/aaaa;
         // • informação de valor numérico deve ser exibida no formatado com separador de
         // milhar como ponto e decimal como vírgula.
@@ -84,21 +92,18 @@ public class Principal {
         System.out.println("\n🟦 3.2 - Remover o funcionário 'João' da lista.");
         System.out.println("🟦 3.3 - Imprimir todos os funcionários com todas suas informações\n");
         funcionarioService.Remover("João");
-        ImprimirTodos();
+        imprimirTodosOsFuncionarios();
+    }
 
-        // 3.4 - Os funcionários receberam 10% de aumento de salário, atualizar a lista
-        // de funcionários com novo valor.
-
+    private static void darAumentoDeDezPorCento() {
         System.out.println(
                 "\n🟦 3.4 - Os funcionários receberam 10% de aumento de salário, atualizar a lista\n");
 
         funcionarioService.DarAumento(0.1);
-        ImprimirTodos();
+        imprimirTodosOsFuncionarios();
+    }
 
-        // 3.5 - Agrupar os funcionários por função em um MAP, sendo a chave a 'função'
-        // e o valor a 'lista de funcionários'.
-        // 3.6 - Imprimir os funcionários, agrupados por função.
-
+    private static void agruparFuncionariosEmUmMap() {
         System.out.println(
                 "\n🟦 3.5 - Agrupar os funcionários por função em um MAP, sendo a chave a 'função' e o valor a 'lista de funcionários'.");
         System.out.println(
@@ -116,17 +121,16 @@ public class Principal {
             System.out.println("*" + entry.getKey().toUpperCase() + ":");
             entry.getValue().forEach(System.out::println);
         }
+    }
 
-        // 3.8 - Imprimir os funcionários que fazem aniversário no mês 10 e 12.
-
+    private static void imprimirAniversariantesOutubroDezembro() {
         System.out.println("\n🟦 3.8 - Imprimir os funcionários que fazem aniversário no mês 10 e 12.\n");
 
         var meses = new ArrayList<Integer>(List.of(10, 12));
         funcionarioService.PesquisarPorMesDeNascimento(meses).forEach(System.out::println);
+    }
 
-        // 3.9 - Imprimir o funcionário com a maior idade, exibir os atributos: nome e
-        // idade.
-
+    private static void imprimirMaisVelho() {
         System.out.println(
                 "\n🟦 3.9 - Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade.\n");
 
@@ -138,18 +142,18 @@ public class Principal {
         var idade = Period.between(maisVelho.DataNascimento, LocalDate.now()).getYears();
 
         System.out.println(String.format("Nome: %s, Idade: %s anos", maisVelho.Nome, idade));
+    }
 
-        // 3.10 - Imprimir a lista de funcionários por ordem alfabética.
-
+    private static void imprimirEmOrdemAlfabetica() {
         System.out.println("\n🟦 3.10 - Imprimir a lista de funcionários por ordem alfabética.\n");
 
         funcionarioService.ObterTodos()
                 .stream()
                 .sorted()
                 .forEach(System.out::println);
+    }
 
-        // 3.11 - Imprimir o total dos salários dos funcionários.
-
+    private static void imprimirTotalDosSalarios() {
         System.out.println("\n🟦 3.11 - Imprimir o total dos salários dos funcionários.\n");
 
         var salarioTotal = funcionarioService.ObterTodos()
@@ -159,10 +163,9 @@ public class Principal {
                 .orElse(null);
 
         System.out.println("Salário total: R$ " + new DecimalFormat("#,##0.00").format(salarioTotal));
+    }
 
-        // 3.12 - Imprimir quantos salários mínimos ganha cada funcionário, considerando
-        // que o salário mínimo é R$1212.00.
-
+    private static void imprimirQuantidadeSalariosMinimos() {
         System.out.println("\n🟦 3.12 - Imprimir quantos salários mínimos ganha cada funcionário.\n");
 
         funcionarioService.ObterTodos().forEach(
@@ -170,7 +173,7 @@ public class Principal {
                         String.format("%-15s\t%5.2f", x.Nome, x.Salario.doubleValue() / SALARIO_MINIMO)));
     }
 
-    private static void ImprimirTodos() {
+    private static void imprimirTodosOsFuncionarios() {
         funcionarioService.ObterTodos().forEach(System.out::println);
     }
 }
