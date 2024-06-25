@@ -21,6 +21,10 @@ public class FuncionarioService {
         this.funcionarioRepository.Inserir(funcionario);
     }
 
+    public void Inserir(ArrayList<Funcionario> funcionarios) {
+        funcionarios.forEach(this.funcionarioRepository::Inserir);
+    }
+
     public void Remover(String nome) {
         this.funcionarioRepository.Remover(nome);
     }

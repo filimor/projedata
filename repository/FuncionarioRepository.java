@@ -14,7 +14,7 @@ public class FuncionarioRepository {
     }
 
     public ArrayList<Funcionario> ObterTodos() {
-        return new ArrayList<Funcionario>(this.funcionarios);
+        return new ArrayList<>(this.funcionarios);
     }
 
     public Funcionario ObterPorNome(String nome) {
@@ -44,7 +44,7 @@ public class FuncionarioRepository {
     }
 
     public ArrayList<Funcionario> Pesquisar(Predicate<Funcionario> condicao) {
-        return new ArrayList<Funcionario>(this.funcionarios.stream()
+        return new ArrayList<>(this.funcionarios.stream()
                 .filter(condicao)
                 .collect(Collectors.toList()));
     }

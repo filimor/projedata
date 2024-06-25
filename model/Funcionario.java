@@ -15,14 +15,6 @@ public final class Funcionario extends Pessoa {
         this.Funcao = funcao;
     }
 
-    @Override
-    public String toString() {
-        var data = this.DataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        var salario = new DecimalFormat("#,##0.00").format(this.Salario);
-
-        return String.format("%-15s\t%-10s\t%10s\t%s", this.Nome, data, salario, this.Funcao);
-    }
-
     public BigDecimal getSalario() {
         return Salario;
     }
@@ -37,5 +29,16 @@ public final class Funcionario extends Pessoa {
 
     public void setFuncao(String funcao) {
         Funcao = funcao;
+    }
+
+    @Override
+    public String toString() {
+        // • informação de data deve ser exibido no formato dd/mm/aaaa;
+        // • informação de valor numérico deve ser exibida no formatado com separador de
+        // milhar como ponto e decimal como vírgula.
+        var data = this.DataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        var salario = new DecimalFormat("#,##0.00").format(this.Salario);
+
+        return String.format("%-15s\t%-10s\t%10s\t%s", this.Nome, data, salario, this.Funcao);
     }
 }
