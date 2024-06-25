@@ -1,11 +1,11 @@
-package src.main.java.com.projedata.service;
+package com.projedata.service;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import src.main.java.com.projedata.model.Funcionario;
-import src.main.java.com.projedata.repository.FuncionarioRepository;
+import com.projedata.model.Funcionario;
+import com.projedata.repository.FuncionarioRepository;
 
 public class FuncionarioService {
     private FuncionarioRepository funcionarioRepository = new FuncionarioRepository();

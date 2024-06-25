@@ -1,4 +1,4 @@
-package src.main.java.com.projedata.model;
+package com.projedata.model;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

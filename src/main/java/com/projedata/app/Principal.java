@@ -1,4 +1,4 @@
-package src.main.java.com.projedata.app;
+package com.projedata.app;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,8 +8,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import src.main.java.com.projedata.model.Funcionario;
-import src.main.java.com.projedata.service.FuncionarioService;
+import com.projedata.model.Funcionario;
+import com.projedata.service.FuncionarioService;
 
 public class Principal {
     static final double SALARIO_MINIMO = 1212.00;
@@ -28,7 +28,7 @@ public class Principal {
     }
 
     private static void inserirTodosOsFuncionarios() {
-        System.out.println("🟦 3.1 - Inserir todos os funcionários, na mesma ordem e informações da tabela.\n");
+        System.out.println(">> 3.1 - Inserir todos os funcionários, na mesma ordem e informações da tabela.\n");
 
         funcionarioService.inserir(List.of(
                 new Funcionario("Maria", LocalDate.of(2000, 10, 18), BigDecimal.valueOf(2009.44), "Operador"),
@@ -46,15 +46,15 @@ public class Principal {
     }
 
     private static void removerJoao() {
-        System.out.println("\n🟦 3.2 - Remover o funcionário 'João' da lista.");
-        System.out.println("🟦 3.3 - Imprimir todos os funcionários com todas suas informações\n");
+        System.out.println("\n>> 3.2 - Remover o funcionário 'João' da lista.");
+        System.out.println(">> 3.3 - Imprimir todos os funcionários com todas suas informações\n");
 
         funcionarioService.remover("João");
         imprimirTodosOsFuncionarios();
     }
 
     private static void darAumentoDeDezPorCento() {
-        System.out.println("\n🟦 3.4 - Os funcionários receberam 10% de aumento de salário, atualizar a lista\n");
+        System.out.println("\n>> 3.4 - Os funcionários receberam 10% de aumento de salário, atualizar a lista\n");
 
         funcionarioService.darAumento(0.1);
         imprimirTodosOsFuncionarios();
@@ -62,8 +62,8 @@ public class Principal {
 
     private static void agruparFuncionariosEmUmMap() {
         System.out.println(
-                "\n🟦 3.5 - Agrupar os funcionários por função em um MAP, sendo a chave a 'função' e o valor a 'lista de funcionários'.");
-        System.out.println("🟦 3.6 - Imprimir os funcionários, agrupados por função.\n");
+                "\n>> 3.5 - Agrupar os funcionários por função em um MAP, sendo a chave a 'função' e o valor a 'lista de funcionários'.");
+        System.out.println(">> 3.6 - Imprimir os funcionários, agrupados por função.\n");
 
         var funcionariosMap = new HashMap<String, ArrayList<Funcionario>>();
         for (var funcionario : funcionarioService.obterTodos()) {
@@ -80,7 +80,7 @@ public class Principal {
     }
 
     private static void imprimirAniversariantesOutubroDezembro() {
-        System.out.println("\n🟦 3.8 - Imprimir os funcionários que fazem aniversário no mês 10 e 12.\n");
+        System.out.println("\n>> 3.8 - Imprimir os funcionários que fazem aniversário no mês 10 e 12.\n");
 
         var meses = List.of(10, 12);
         funcionarioService.pesquisarPorMesDeNascimento(meses).forEach(System.out::println);
@@ -88,7 +88,7 @@ public class Principal {
 
     private static void imprimirMaisVelho() {
         System.out.println(
-                "\n🟦 3.9 - Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade.\n");
+                "\n>> 3.9 - Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade.\n");
 
         Funcionario maisVelho = funcionarioService.obterTodos()
                 .stream()
@@ -100,18 +100,18 @@ public class Principal {
     }
 
     private static void imprimirEmOrdemAlfabetica() {
-        System.out.println("\n🟦 3.10 - Imprimir a lista de funcionários por ordem alfabética.\n");
+        System.out.println("\n>> 3.10 - Imprimir a lista de funcionários por ordem alfabética.\n");
         funcionarioService.obterPorOrdemAlfabetica().forEach(System.out::println);
     }
 
     private static void imprimirTotalDosSalarios() {
-        System.out.println("\n🟦 3.11 - Imprimir o total dos salários dos funcionários.\n");
+        System.out.println("\n>> 3.11 - Imprimir o total dos salários dos funcionários.\n");
         System.out.println(
                 "Salário total: R$ " + Funcionario.DECIMAL_FORMAT.format(funcionarioService.obterSalarioTotal()));
     }
 
     private static void imprimirQuantidadeSalariosMinimos() {
-        System.out.println("\n🟦 3.12 - Imprimir quantos salários mínimos ganha cada funcionário.\n");
+        System.out.println("\n>> 3.12 - Imprimir quantos salários mínimos ganha cada funcionário.\n");
 
         funcionarioService.obterTodos().forEach(
                 x -> System.out.println(
