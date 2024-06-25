@@ -19,4 +19,8 @@ public class FuncionarioService {
     public void Inserir(Funcionario funcionario) {
         this.funcionarioRepository.Inserir(funcionario);
     }
+
+    public void Remover(String nome) {
+        this.funcionarioRepository.Remover(nome);
+    }
 }

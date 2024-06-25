@@ -67,5 +67,16 @@ public class Principal {
                         System.out.println(String.format("%s %s %s %s", funcionario.Nome, funcionario.DataNascimento,
                                         funcionario.Salario, funcionario.Funcao));
                 }
+
+                // 3.1 - Inserir todos os funcionários, na mesma ordem e informações da tabela.
+
+                System.out.println("\n🟦 3.2 - Remover o funcionário 'João' da lista..\n");
+
+                funcionarioService.Remover("João");
+
+                for (Funcionario funcionario : funcionarioService.ObterTodos()) {
+                        System.out.println(String.format("%s %s %s %s", funcionario.Nome, funcionario.DataNascimento,
+                                        funcionario.Salario, funcionario.Funcao));
+                }
         }
 }

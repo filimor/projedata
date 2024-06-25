@@ -18,4 +18,8 @@ public class FuncionarioRepository {
     public void Inserir(Funcionario funcionario) {
         this.funcionarios.add(funcionario);
     }
+
+    public void Remover(String nome) {
+        this.funcionarios.removeIf(x -> x.Nome.equals(nome));
+    }
 }
