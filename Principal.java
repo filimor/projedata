@@ -11,6 +11,8 @@ import model.Funcionario;
 import service.FuncionarioService;
 
 public class Principal {
+
+    static final double SALARIO_MINIMO = 1212.00;
     static FuncionarioService funcionarioService = new FuncionarioService();
 
     public static void main(String[] args) {
@@ -157,6 +159,15 @@ public class Principal {
                 .orElse(null);
 
         System.out.println("Salário total: R$ " + new DecimalFormat("#,##0.00").format(salarioTotal));
+
+        // 3.12 - Imprimir quantos salários mínimos ganha cada funcionário, considerando
+        // que o salário mínimo é R$1212.00.
+
+        System.out.println("\n🟦 3.12 - Imprimir quantos salários mínimos ganha cada funcionário.\n");
+
+        funcionarioService.ObterTodos().forEach(
+                x -> System.out.println(
+                        String.format("%-15s\t%5.2f", x.Nome, x.Salario.doubleValue() / SALARIO_MINIMO)));
     }
 
     private static void ImprimirTodos() {
