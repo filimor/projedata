@@ -1,6 +1,8 @@
 package repository;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import model.Funcionario;
 
@@ -16,7 +18,10 @@ public class FuncionarioRepository {
     }
 
     public Funcionario ObterPorNome(String nome) {
-        return funcionarios.stream().filter(x -> x.Nome.equals(nome)).findFirst().orElse(null);
+        return this.funcionarios.stream()
+                .filter(x -> x.Nome.equals(nome))
+                .findFirst()
+                .orElse(null);
     }
 
     public void Inserir(Funcionario funcionario) {
@@ -36,5 +41,11 @@ public class FuncionarioRepository {
 
     public void Remover(String nome) {
         this.funcionarios.removeIf(x -> x.Nome.equals(nome));
+    }
+
+    public ArrayList<Funcionario> Pesquisar(Predicate<Funcionario> condicao) {
+        return new ArrayList<Funcionario>(this.funcionarios.stream()
+                .filter(condicao)
+                .collect(Collectors.toList()));
     }
 }

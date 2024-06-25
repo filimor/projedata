@@ -33,4 +33,8 @@ public class FuncionarioService {
             funcionarioRepository.Atualizar(funcionario.Nome, funcionarioNovo);
         }
     }
+
+    public ArrayList<Funcionario> PesquisarPorMesDeNascimento(ArrayList<Integer> meses) {
+        return funcionarioRepository.Pesquisar(x -> meses.contains(x.DataNascimento.getMonthValue()));
+    }
 }

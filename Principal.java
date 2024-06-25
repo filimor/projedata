@@ -1,9 +1,8 @@
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import model.Funcionario;
 import service.FuncionarioService;
@@ -112,6 +111,13 @@ public class Principal {
             System.out.println("*" + entry.getKey().toUpperCase() + ":");
             entry.getValue().forEach(System.out::println);
         }
+
+        // 3.8 - Imprimir os funcionários que fazem aniversário no mês 10 e 12.
+
+        System.out.println("\n🟦 3.8 - Imprimir os funcionários que fazem aniversário no mês 10 e 12.\n");
+
+        var meses = new ArrayList<Integer>(List.of(10, 12));
+        funcionarioService.PesquisarPorMesDeNascimento(meses).forEach(System.out::println);
 
     }
 
