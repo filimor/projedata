@@ -1,5 +1,7 @@
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import model.Funcionario;
 import service.FuncionarioService;
@@ -64,19 +66,36 @@ public class Principal {
                                 "Gerente"));
 
                 for (Funcionario funcionario : funcionarioService.ObterTodos()) {
-                        System.out.println(String.format("%s %s %s %s", funcionario.Nome, funcionario.DataNascimento,
-                                        funcionario.Salario, funcionario.Funcao));
+                        System.out.println(
+                                        String.format("%s\t%s\t%10s\t%s", funcionario.Nome, funcionario.DataNascimento,
+                                                        funcionario.Salario, funcionario.Funcao));
                 }
 
                 // 3.1 - Inserir todos os funcionários, na mesma ordem e informações da tabela.
 
-                System.out.println("\n🟦 3.2 - Remover o funcionário 'João' da lista..\n");
+                System.out.println("\n🟦 3.2 - Remover o funcionário 'João' da lista.\n");
 
                 funcionarioService.Remover("João");
 
                 for (Funcionario funcionario : funcionarioService.ObterTodos()) {
-                        System.out.println(String.format("%s %s %s %s", funcionario.Nome, funcionario.DataNascimento,
-                                        funcionario.Salario, funcionario.Funcao));
+                        System.out.println(
+                                        String.format("%s\t%s\t%10s\t%s", funcionario.Nome, funcionario.DataNascimento,
+                                                        funcionario.Salario, funcionario.Funcao));
+                }
+
+                // 3.3 - Imprimir todos os funcionários com todas suas informações, sendo que:
+                // • informação de data deve ser exibido no formato dd/mm/aaaa;
+                // • informação de valor numérico deve ser exibida no formatado com separador de
+                // milhar como ponto e decimal como vírgula.
+
+                System.out.println("\n🟦 3.3 - Imprimir todos os funcionários com todas suas informações\n");
+
+                for (Funcionario funcionario : funcionarioService.ObterTodos()) {
+                        var data = funcionario.DataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        var salario = new DecimalFormat("#,##0.00").format(funcionario.Salario);
+
+                        System.out.println(String.format("%s\t%s\t%10s\t%s", funcionario.Nome, data,
+                                        salario, funcionario.Funcao));
                 }
         }
 }
