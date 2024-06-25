@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -144,6 +145,18 @@ public class Principal {
                 .stream()
                 .sorted()
                 .forEach(System.out::println);
+
+        // 3.11 - Imprimir o total dos salários dos funcionários.
+
+        System.out.println("\n🟦 3.11 - Imprimir o total dos salários dos funcionários.\n");
+
+        var salarioTotal = funcionarioService.ObterTodos()
+                .stream()
+                .map(x -> x.Salario)
+                .reduce((x, y) -> x.add(y))
+                .orElse(null);
+
+        System.out.println("Salário total: R$ " + new DecimalFormat("#,##0.00").format(salarioTotal));
     }
 
     private static void ImprimirTodos() {
